@@ -58,12 +58,8 @@ buildTypes {
         }
     }
 }
-    buildTypes {
-        release {
-            signingConfig = signingConfigs.getByName("release")
-        }
-    }
-}
+    
+
 
 flutter {
     source = "../.."
