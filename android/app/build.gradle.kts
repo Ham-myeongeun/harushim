@@ -39,6 +39,7 @@ android {
     }
 
     signingConfigs {
+    if (keystorePropertiesFile.exists()) {
         create("release") {
             keyAlias = keystoreProperties["keyAlias"] as String
             keyPassword = keystoreProperties["keyPassword"] as String
@@ -46,7 +47,17 @@ android {
             storePassword = keystoreProperties["storePassword"] as String
         }
     }
+}
 
+buildTypes {
+    release {
+        signingConfig = if (keystorePropertiesFile.exists()) {
+            signingConfigs.getByName("release")
+        } else {
+            signingConfigs.getByName("debug")
+        }
+    }
+}
     buildTypes {
         release {
             signingConfig = signingConfigs.getByName("release")
